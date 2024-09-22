@@ -3,13 +3,19 @@ const UserAvatar = ({ user, online = null, profile = false }) => {
         online == true ? "online" : online == false ? "offline" : "";
 
     const sizeClass = profile ? "w-40" : "w-8";
-
     return (
         <>
             {user.avatar_url && (
                 <div className={`chat-image avatar ${onlineClass}`}>
                     <div className={`rounded-full ${sizeClass}`}>
-                        <img src="{user.avatar_url}" alt="avatar" />
+                        <img
+                            src={
+                                user.avatar_url.startsWith("https://")
+                                    ? user.avatar_url
+                                    : user.avatar_url.replace("/storage/", "")
+                            }
+                            alt="avatar"
+                        />
                     </div>
                 </div>
             )}
